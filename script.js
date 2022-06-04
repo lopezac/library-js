@@ -5,6 +5,8 @@ const siddharta = new Book("Siddharta", "Herman Hesse", 152, true);
 addBookToLibrary(siddharta);
 const demian = new Book("Demian", "Herman Hesse", 362, true);
 addBookToLibrary(demian);
+const siddhartaa = new Book("Siddharta", "Herman Hesse", 152, true);
+addBookToLibrary(siddhartaa);
 
 function Book(title, author, numPages, readed) {
     this.title = title;
