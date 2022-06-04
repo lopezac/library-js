@@ -14,3 +14,11 @@
     align-items: center;
     
 }
+
+.book-form {
+    display: none;
+    flex-direction: column;
+    width: 350px;
+    border: 7px solid rgb(219, 201, 139);
+    background-color: rgb(238, 238, 188);
+}

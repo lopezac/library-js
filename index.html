@@ -13,5 +13,39 @@
     <div class="books">
 
     </div>
+
+    <form action="" method="get" class="book-form">
+        <div>
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" required value="Pantaleon">
+        </div>
+        <div>
+            <label for="author">Author</label>
+            <input id="author" name="author" type="text" required value="Mario Vargas Llosa">
+        </div>
+        <div>
+            <label for="numPages">Number of pages</label>
+            <input id="numPages" name="numPages" type="number" min="1" required>
+        </div>
+        <fieldset>
+            <legend>Readed</legend>
+            <div>
+                <label for="yes">Yes</label>
+                <input type="radio" id="yes" value="true" name="readed" checked>
+            </div>
+            <div>
+                <label for="no">No</label>
+                <input type="radio" id="no" value="false" name="readed">
+            </div>
+        </fieldset>
+        <div>
+            <button type="submit" class="add-book">Add</button>
+        </div>
+        <div>
+            <button class="close-form">X</button>
+        </div>
+    </form>
+
+    <button class="new-book">+</button>
 </body>
 </html>

@@ -1,5 +1,28 @@
 let myLibrary = [];
 const booksDiv = document.querySelector(".books");
+const newBookBtn = document.querySelector(".new-book");
+const newBookForm = document.querySelector(".book-form");
+const submitBookBtn = document.querySelector(".add-book");
+const closeFormBtn = document.querySelector(".close-form");
+
+newBookBtn.addEventListener("click", () => {
+    newBookForm.style.display = "flex";
+});
+newBookForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = new FormData(newBookForm);
+    const bookInfo = {};
+    for (let [name, value] of data) {
+        bookInfo[name] = value;
+    }
+    const newBook = new Book(bookInfo.title, bookInfo.author, bookInfo.numPages,
+        bookInfo.readed);
+    addBookToLibrary(newBook);
+    displayBooks();
+    hideForm();
+});
+closeFormBtn.addEventListener("click", () => hideForm());
+
 
 const siddharta = new Book("Siddharta", "Herman Hesse", 152, true);
 addBookToLibrary(siddharta);
@@ -20,6 +43,7 @@ function addBookToLibrary(book) {
 }
 
 function displayBooks() {
+    removeChilds(booksDiv);
     for (book of myLibrary) {
         const article = document.createElement("article")
         article.className = "book";
@@ -58,6 +82,16 @@ function displayBooks() {
 
         article.append(titleDiv, authorDiv, numPagesDiv, readedDiv);
         booksDiv.appendChild(article);
+    }
+}
+
+function hideForm() {
+    newBookForm.style.display = "none";
+}
+
+function removeChilds(parent) {
+    while (parent.lastChild) {
+        parent.removeChild(parent.lastChild);
     }
 }
 
