@@ -9,26 +9,22 @@ newBookBtn.addEventListener("click", () => {
     newBookForm.classList.remove("hiden");
 });
 newBookForm.addEventListener("submit", function(e) {createBook(e)});
-
-
 closeFormBtn.addEventListener("click", () => hideForm());
 
 const siddharta = new Book("Siddharta", "Herman Hesse", 152, true);
 addBookToLibrary(siddharta);
 const demian = new Book("Demian", "Herman Hesse", 362, true);
 addBookToLibrary(demian);
-const siddhartaa = new Book("Siddharta", "Herman Hesse", 152, true);
-addBookToLibrary(siddhartaa);
+const knulp = new Book("Knulp", "Herman Hesse", 220, true);
+addBookToLibrary(knulp);
 
 displayBooks();
-let deleteBookBtns = document.querySelectorAll(".delete-book-btn");
-deleteBookBtns.forEach(btn => {
-    btn.addEventListener("click", function(e) {
-        console.log(e.target.parentNode.dataset.index);
-        // booksDiv.removeChild(e.target.parentNode);
-        // displayBooks();
-    });
-});
+
+function deleteBook(e) {
+    let bookIdx = e.target.parentNode.dataset.index;
+    myLibrary[bookIdx] = "";
+    displayBooks();
+}
 
 function Book(title, author, numPages, readed) {
     this.title = title;
@@ -51,7 +47,6 @@ function createBook(e) {
     addBookToLibrary(newBook);
     displayBooks();
     hideForm();
-    deleteBookBtns = document.querySelectorAll(".delete-book-btn");
 }
 
 function addBookToLibrary(book) {
@@ -61,6 +56,8 @@ function addBookToLibrary(book) {
 function displayBooks() {
     removeChilds(booksDiv);
     for (book of myLibrary) {
+        if (book === "") continue;
+
         const article = document.createElement("article")
         article.className = "book";
         article.dataset.index = book.index;
@@ -86,6 +83,7 @@ function displayBooks() {
         deleteBookBtn.className = "delete-book-btn";
         deleteBookBtn.textContent = "x";
         deleteBookBtn.type = "button";
+        deleteBookBtn.addEventListener("click", function(e) {deleteBook(e)});
 
         const titleValue = document.createElement("p");
         titleValue.textContent = book.title;
