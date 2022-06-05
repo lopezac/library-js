@@ -15,16 +15,10 @@ const siddharta = new Book("Siddharta", "Herman Hesse", 152, true);
 addBookToLibrary(siddharta);
 const demian = new Book("Demian", "Herman Hesse", 362, true);
 addBookToLibrary(demian);
-const knulp = new Book("Knulp", "Herman Hesse", 220, true);
+const knulp = new Book("Knulp", "Herman Hesse", 220, false);
 addBookToLibrary(knulp);
 
 displayBooks();
-
-function deleteBook(e) {
-    let bookIdx = e.target.parentNode.dataset.index;
-    myLibrary[bookIdx] = "";
-    displayBooks();
-}
 
 function Book(title, author, numPages, readed) {
     this.title = title;
@@ -32,6 +26,11 @@ function Book(title, author, numPages, readed) {
     this.numPages = numPages;
     this.readed = readed;
     this.index = myLibrary.length;
+}
+
+Book.prototype.toggleReaded = function() {
+    this.readed = (this.readed) ? false : true;
+    console.log(this.readed);
 }
 
 function createBook(e) {
@@ -61,7 +60,7 @@ function displayBooks() {
         const article = document.createElement("article")
         article.className = "book";
         article.dataset.index = book.index;
-
+        
         const titleDiv = document.createElement("div");
         titleDiv.className = "title";
         const authorDiv = document.createElement("div");
@@ -70,7 +69,7 @@ function displayBooks() {
         numPagesDiv.className = "numPages";
         const readedDiv = document.createElement("div");
         readedDiv.className = "readed";
-
+        
         const titleName = document.createElement("h4");
         titleName.textContent = "Title:";
         const authorName = document.createElement("h4");
@@ -79,6 +78,13 @@ function displayBooks() {
         numPagesName.textContent = "Number of pages:";
         const readedName = document.createElement("h4");
         readedName.textContent = "Readed:";
+
+        const readedBtn = document.createElement("button");
+        readedBtn.type = "button";
+        readedBtn.className = "readed-book-btn";
+        readedBtn.addEventListener("click", function(e) {changeBookReadStatus(e)});
+        readedBtn.textContent = "change";
+        
         const deleteBookBtn = document.createElement("button");
         deleteBookBtn.className = "delete-book-btn";
         deleteBookBtn.textContent = "x";
@@ -97,8 +103,8 @@ function displayBooks() {
         titleDiv.append(titleName, titleValue);
         authorDiv.append(authorName, authorValue);
         numPagesDiv.append(numPagesName, numPagesValue);
-        readedDiv.append(readedName, readedValue);
-
+        readedDiv.append(readedName, readedValue, readedBtn);
+        
         article.append(titleDiv, authorDiv, numPagesDiv, readedDiv, deleteBookBtn);
         booksDiv.appendChild(article);
     }
@@ -112,4 +118,17 @@ function removeChilds(parent) {
     while (parent.lastChild) {
         parent.removeChild(parent.lastChild);
     }
+}
+
+function deleteBook(event) {
+    let bookIdx = event.target.parentNode.dataset.index;
+    myLibrary[bookIdx] = "";
+    displayBooks();
+}
+
+function changeBookReadStatus(event) {
+    let bookIdx = event.target.parentNode.parentNode.dataset.index;
+    let book = myLibrary[bookIdx];
+    book.toggleReaded();
+    event.target.previousSibling.textContent = book.readed;
 }
