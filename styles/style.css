@@ -1,5 +1,37 @@
-html, body {
+@font-face {
+    font-family: "Noto Serif";
+    src: url("../fonts/NotoSerif-Regular.woff") format("woff");
+}
+
+:root {
+    --blue-dark: #071129;
+    --light-white: #FEFCE8;
+    --red: #7F1D1D;
+}
+
+body {
     height: 100%;
+    background: linear-gradient(rgba(225,237,205,1), rgb(181, 212, 122));
+    background-attachment: fixed;
+    font-family: "Noto Serif";
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.navbar {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0;
+    color: var(--blue-dark);
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .books {
@@ -9,26 +41,129 @@ html, body {
 }
 
 .book {
-    background-color: rgb(248, 222, 134);
-    border: 7px solid rgba(90, 64, 16, 0.596);
+    background-color: var(--blue-dark);
+    border: 7px solid var(--light-white);
+    color: var(--light-white);
+    
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: "title delete"
+                         "author ."
+                         "numpages ."
+                         "readed change";
+    align-items: center;
+    padding: 0 10px;
 }
 
-.book > * {
+.btn-icon {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 48px;
+    height: 48px;
+    border: none;
+}
+
+.btn-icon:hover {
+    cursor: pointer;
+}
+
+.book .delete-book-btn {
+    grid-area: delete;
+    background-image: url("../icons/delete_white_24dp.svg");
+}
+
+.book .readed-book-btn {
+    background-image: url("../icons/auto_stories_white_24dp.svg");
+}
+
+.book .readed-book-btn {
+    grid-area: change;
+}
+
+.book div h4,
+.book-form label,
+.book-form legend {
+    font-size: 1.2rem;
+}
+
+.book div p {
+    font-size: 1rem;
+}
+
+.title {
+    grid-area: title;
+}
+
+.author {
+    grid-area: author;
+}
+
+.numPages {
+    grid-area: numpages;
+}
+
+.readed {
+    grid-area: readed;
+}
+
+.book > div {
     display: flex;
     align-items: center;
+    column-gap: 5px;
+}
+
+.new-book {
+    background-image: url("../icons/add_white_24dp.svg");
+    background-color: var(--red);
+    border: none;
+    border-radius: 50px;
+    width: 80px;
+    height: 80px;
+    align-self: flex-end;
+    margin-right: 20px;
+}
+
+.book {
+    border-radius: 5px;
 }
 
 .book-form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: repeat(5, auto);
+    grid-template-areas: "title close"
+                         "author ."
+                         "numpages ."
+                         "readed ."
+                         "submit .";
+ 
     width: 350px;
-    border: 7px solid rgb(219, 201, 139);
-    background-color: rgb(238, 238, 188);
+    border: none;
+    background-color: var(--red);
+    color: white;
+    border-radius: 10px;
+    gap: 20px;
+    padding: 20px;
     
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.submit-form {
+    grid-area: submit;
+}
+
+.close-form {
+    grid-area: close;
+}
+
+.book-form input {
+    display: inline-block;
 }
 
 .hiden {

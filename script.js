@@ -75,19 +75,17 @@ function displayBooks() {
         const authorName = document.createElement("h4");
         authorName.textContent = "Author:";
         const numPagesName = document.createElement("h4");
-        numPagesName.textContent = "Number of pages:";
+        numPagesName.textContent = "N° pages:";
         const readedName = document.createElement("h4");
         readedName.textContent = "Readed:";
 
         const readedBtn = document.createElement("button");
         readedBtn.type = "button";
-        readedBtn.className = "readed-book-btn";
+        readedBtn.classList.add("readed-book-btn", "btn-icon");
         readedBtn.addEventListener("click", function(e) {changeBookReadStatus(e)});
-        readedBtn.textContent = "change";
-        
+
         const deleteBookBtn = document.createElement("button");
-        deleteBookBtn.className = "delete-book-btn";
-        deleteBookBtn.textContent = "x";
+        deleteBookBtn.classList.add("delete-book-btn", "btn-icon");
         deleteBookBtn.type = "button";
         deleteBookBtn.addEventListener("click", function(e) {deleteBook(e)});
 
@@ -103,9 +101,10 @@ function displayBooks() {
         titleDiv.append(titleName, titleValue);
         authorDiv.append(authorName, authorValue);
         numPagesDiv.append(numPagesName, numPagesValue);
-        readedDiv.append(readedName, readedValue, readedBtn);
+        readedDiv.append(readedName, readedValue);
         
-        article.append(titleDiv, authorDiv, numPagesDiv, readedDiv, deleteBookBtn);
+        article.append(titleDiv, authorDiv, numPagesDiv, readedDiv, readedBtn,
+            deleteBookBtn);
         booksDiv.appendChild(article);
     }
 }
@@ -127,8 +126,8 @@ function deleteBook(event) {
 }
 
 function changeBookReadStatus(event) {
-    let bookIdx = event.target.parentNode.parentNode.dataset.index;
+    let bookIdx = event.target.parentNode.dataset.index;
     let book = myLibrary[bookIdx];
     book.toggleReaded();
-    event.target.previousSibling.textContent = book.readed;
+    event.target.previousSibling.lastChild.textContent = book.readed;
 }
