@@ -6,23 +6,12 @@ const submitBookBtn = document.querySelector(".add-book");
 const closeFormBtn = document.querySelector(".close-form");
 
 newBookBtn.addEventListener("click", () => {
-    newBookForm.style.display = "flex";
+    newBookForm.classList.remove("hiden");
 });
-newBookForm.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const data = new FormData(newBookForm);
-    const bookInfo = {};
-    for (let [name, value] of data) {
-        bookInfo[name] = value;
-    }
-    const newBook = new Book(bookInfo.title, bookInfo.author, bookInfo.numPages,
-        bookInfo.readed);
-    addBookToLibrary(newBook);
-    displayBooks();
-    hideForm();
-});
-closeFormBtn.addEventListener("click", () => hideForm());
+newBookForm.addEventListener("submit", function(e) {createBook(e)});
 
+
+closeFormBtn.addEventListener("click", () => hideForm());
 
 const siddharta = new Book("Siddharta", "Herman Hesse", 152, true);
 addBookToLibrary(siddharta);
@@ -31,11 +20,38 @@ addBookToLibrary(demian);
 const siddhartaa = new Book("Siddharta", "Herman Hesse", 152, true);
 addBookToLibrary(siddhartaa);
 
+displayBooks();
+let deleteBookBtns = document.querySelectorAll(".delete-book-btn");
+deleteBookBtns.forEach(btn => {
+    btn.addEventListener("click", function(e) {
+        console.log(e.target.parentNode.dataset.index);
+        // booksDiv.removeChild(e.target.parentNode);
+        // displayBooks();
+    });
+});
+
 function Book(title, author, numPages, readed) {
     this.title = title;
     this.author = author;
     this.numPages = numPages;
     this.readed = readed;
+    this.index = myLibrary.length;
+}
+
+function createBook(e) {
+    e.preventDefault();
+    const data = new FormData(newBookForm);
+    const bookInfo = {};
+    for (let [name, value] of data) {
+        bookInfo[name] = value;
+    }
+    
+    const newBook = new Book(bookInfo.title, bookInfo.author, bookInfo.numPages,
+        bookInfo.readed);
+    addBookToLibrary(newBook);
+    displayBooks();
+    hideForm();
+    deleteBookBtns = document.querySelectorAll(".delete-book-btn");
 }
 
 function addBookToLibrary(book) {
@@ -47,6 +63,7 @@ function displayBooks() {
     for (book of myLibrary) {
         const article = document.createElement("article")
         article.className = "book";
+        article.dataset.index = book.index;
 
         const titleDiv = document.createElement("div");
         titleDiv.className = "title";
@@ -65,6 +82,10 @@ function displayBooks() {
         numPagesName.textContent = "Number of pages:";
         const readedName = document.createElement("h4");
         readedName.textContent = "Readed:";
+        const deleteBookBtn = document.createElement("button");
+        deleteBookBtn.className = "delete-book-btn";
+        deleteBookBtn.textContent = "x";
+        deleteBookBtn.type = "button";
 
         const titleValue = document.createElement("p");
         titleValue.textContent = book.title;
@@ -80,13 +101,13 @@ function displayBooks() {
         numPagesDiv.append(numPagesName, numPagesValue);
         readedDiv.append(readedName, readedValue);
 
-        article.append(titleDiv, authorDiv, numPagesDiv, readedDiv);
+        article.append(titleDiv, authorDiv, numPagesDiv, readedDiv, deleteBookBtn);
         booksDiv.appendChild(article);
     }
 }
 
 function hideForm() {
-    newBookForm.style.display = "none";
+    newBookForm.classList.add("hiden");
 }
 
 function removeChilds(parent) {
@@ -94,5 +115,3 @@ function removeChilds(parent) {
         parent.removeChild(parent.lastChild);
     }
 }
-
-displayBooks();
