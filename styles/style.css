@@ -140,7 +140,6 @@ h1 {
                          "readed ."
                          "submit .";
  
-    width: 350px;
     border: none;
     background-color: var(--red);
     color: white;
@@ -154,16 +153,59 @@ h1 {
     transform: translate(-50%, -50%);
 }
 
-.submit-form {
-    grid-area: submit;
+fieldset.readed {
+    grid-area: readed;
+    display: flex;
+    /* display: grid;
+    grid-template-columns: auto auto auto; */
+    border: none;
+    padding: 0;
 }
 
+.book-form div {
+    display: flex;
+}
+
+.book-form > div > label,
+fieldset.readed span {
+    width: 90px;
+}
+
+fieldset.readed span {
+    /* grid-area: legend; */
+}
+
+fieldset.readed .true {
+    padding-right: 20px;
+}
+                        
+.submit-form {
+    grid-area: submit;
+    justify-content: center;
+}
+                        
 .close-form {
     grid-area: close;
 }
 
+.close-form-btn {
+    background-image: url("../icons/close_FILL0_wght400_GRAD0_opsz48.svg");
+    width: 34px;
+    height: 34px;
+}
+
 .book-form input {
-    display: inline-block;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 10px;
+}
+
+.submit-form .add-book {
+    border-radius: 5px;
+    border: none;
+    padding: 10px 25px;
+    font-size: 1.3rem;
+    text-align: center;
 }
 
 .hiden {

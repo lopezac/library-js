@@ -31,12 +31,12 @@
             <input id="numPages" name="numPages" type="number" min="1" required>
         </div>
         <fieldset class="readed">
-            <legend>Readed</legend>
-            <div>
+            <span><legend>Readed</legend></span>
+            <div class="true">
                 <label for="yes">Yes</label>
                 <input type="radio" id="yes" value="true" name="readed" checked>
             </div>
-            <div>
+            <div class="false">
                 <label for="no">No</label>
                 <input type="radio" id="no" value="false" name="readed">
             </div>
@@ -45,7 +45,7 @@
             <button type="submit" class="add-book">Add</button>
         </div>
         <div class="close-form">
-            <button type="button" class="close-form">X</button>
+            <button type="button" class="close-form-btn btn-icon">X</button>
         </div>
     </form>
 </body>
