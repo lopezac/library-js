@@ -156,8 +156,6 @@ h1 {
 fieldset.readed {
     grid-area: readed;
     display: flex;
-    /* display: grid;
-    grid-template-columns: auto auto auto; */
     border: none;
     padding: 0;
 }
@@ -169,10 +167,6 @@ fieldset.readed {
 .book-form > div > label,
 fieldset.readed span {
     width: 90px;
-}
-
-fieldset.readed span {
-    /* grid-area: legend; */
 }
 
 fieldset.readed .true {
