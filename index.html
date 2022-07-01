@@ -14,21 +14,21 @@
     </nav>
 
     <div class="books">
-        
+
     </div>
-    
+
     <form action="" method="get" class="book-form hiden">
         <div class="title">
             <label for="title">Title</label>
-            <input id="title" name="title" type="text" required value="Pantaleon">
+            <input id="title" name="title" type="text" minlength="5" maxlength="100" required value="Pantaleon">
         </div>
         <div class="author">
             <label for="author">Author</label>
-            <input id="author" name="author" type="text" required value="Mario Vargas Llosa">
+            <input id="author" name="author" type="text" required value="Mario Vargas Llosa" minlength="5" maxlength="100">
         </div>
         <div class="numPages">
             <label for="numPages">N° pages</label>
-            <input id="numPages" name="numPages" type="number" min="1" required>
+            <input id="numPages" name="numPages" type="number" min="1" max="3000" required>
         </div>
         <fieldset class="readed">
             <span><legend>Readed</legend></span>
